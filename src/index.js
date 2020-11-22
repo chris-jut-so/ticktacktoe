@@ -111,10 +111,12 @@ function Square(props) {
             } else {
                 desc = 'Go to game start';
             }
+
+            const activeClass = (move === this.state.stepNumber) ? 'active' : '';
             
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpToMove(move)}>{desc}</button>
+                    <button onClick={() => this.jumpToMove(move)} className={activeClass}>{desc}</button>
                 </li>
             );
         });
