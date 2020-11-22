@@ -86,16 +86,6 @@ function Square(props) {
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
 
-        // if(this.state.stepNumber - 1 >= 0 ) {
-        //     const diffCell = findDiffArrIndex(current.squares, history[this.state.stepNumber -1].squares);
-        //     const indices = [
-        //         [1,1], [1,2], [1,3],
-        //         [2,1], [2,2], [2,3],
-        //         [3,1], [3,2], [3,3] 
-        //     ];
-        //     const pos = indices[diffCell];
-        // }
-
         const moves = history.map((step, move) => {
             let desc;
             if(move) {
