@@ -86,10 +86,32 @@ function Square(props) {
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
 
+        // if(this.state.stepNumber - 1 >= 0 ) {
+        //     const diffCell = findDiffArrIndex(current.squares, history[this.state.stepNumber -1].squares);
+        //     const indices = [
+        //         [1,1], [1,2], [1,3],
+        //         [2,1], [2,2], [2,3],
+        //         [3,1], [3,2], [3,3] 
+        //     ];
+        //     const pos = indices[diffCell];
+        // }
+
         const moves = history.map((step, move) => {
-            const desc = move ? 
-                'Go to move # ' + move :
-                'Go to game start';
+            let desc;
+            if(move) {
+                const diffCell = findDiffArrIndex(step.squares, this.state.history[move -1].squares);
+                const indices = [
+                    [1,1], [1,2], [1,3],
+                    [2,1], [2,2], [2,3],
+                    [3,1], [3,2], [3,3] 
+                ];
+                const pos = indices[diffCell];
+
+                desc = 'Go to move # ' + move + '(' + pos[0] + ',' + pos[1] +')';
+            } else {
+                desc = 'Go to game start';
+            }
+            
             return (
                 <li key={move}>
                     <button onClick={() => this.jumpToMove(move)}>{desc}</button>
@@ -141,6 +163,15 @@ function Square(props) {
     }
     return null;
   }
+
+function findDiffArrIndex(arr1, arr2) {
+    if(arr1.length === arr2.length) {
+        for(let i = 0; i < arr1.length; i++) {
+            if(arr1[i] !== arr2[i]) return i;
+        }
+        return null;
+    }
+}
   
   // ========================================
   
